@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const EmployeeList = () => {
+const EmployeeList = ({ reload }) => {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     loadEmployees();
-  }, []);
+  }, [reload]); // Re-fetch when reload prop changes
 
   const loadEmployees = async () => {
     try {
@@ -27,20 +27,20 @@ const EmployeeList = () => {
             <th>ID</th>
             <th>Full Name</th>
             <th>Email</th>
-            <th>department</th>
+            <th>Department</th>
             <th>Created At</th>
             <th>Updated At</th>
           </tr>
         </thead>
         <tbody>
           {employees.map((emp) => (
-            <tr key={emp.id}>
+            <tr key={emp.eid}>
               <td>{emp.eid}</td>
               <td>{emp.name}</td>
               <td>{emp.email}</td>
               <td>{emp.department}</td>
-              <th>{emp.createdAt}</th>
-              <th>{emp.updatedAt}</th>
+              <td>{emp.createdAt}</td>
+              <td>{emp.updatedAt}</td>
             </tr>
           ))}
         </tbody>
